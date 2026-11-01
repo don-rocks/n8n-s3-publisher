@@ -1,0 +1,13 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+
+# Environment files and secrets
+.env
+*.pem
+
+# macOS
+.DS_Store
