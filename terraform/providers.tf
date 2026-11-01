@@ -11,7 +11,8 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-west-1"
+  # The AWS Settings project's guardrail (an SCP) only allows eu-north-1.
+  region = "eu-north-1"
 
   # Refuses to run against any account except the personal practice account.
   allowed_account_ids = ["748348796384"]
