@@ -17,7 +17,7 @@ An inline policy, `n8n-practice-publish`, built from `data.aws_iam_policy_docume
 
 | Statement | Actions | Resource | Why n8n needs it |
 |---|---|---|---|
-| `ListBucket` | `s3:ListBucket` | the bucket | Lets n8n check whether a post already exists. Without it, S3 returns 403 instead of 404 for missing keys, which makes "does this exist?" checks ambiguous. |
+| `ListBucket` | `s3:ListBucket`, `s3:GetBucketLocation` | the bucket | `ListBucket` lets n8n check whether a post already exists. Without it, S3 returns 403 instead of 404 for missing keys, which makes "does this exist?" checks ambiguous. `GetBucketLocation` is needed because n8n's S3 node looks up the bucket's region before every operation; without it, uploads fail with AccessDenied. |
 | `WriteSiteObjects` | `s3:PutObject`, `s3:GetObject` | `bucket/*` | Upload posts, the home page and the sitemap; read them back to verify. |
 | `InvalidateCache` | `cloudfront:CreateInvalidation`, `cloudfront:GetInvalidation` | the distribution | Clear the cache after publishing and check when that's done. |
 

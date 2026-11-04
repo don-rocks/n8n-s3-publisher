@@ -11,9 +11,11 @@ resource "aws_iam_user" "n8n" {
 }
 
 data "aws_iam_policy_document" "n8n" {
+  # GetBucketLocation: n8n's S3 node looks up the bucket's region before
+  # every operation, and fails with AccessDenied without it.
   statement {
     sid       = "ListBucket"
-    actions   = ["s3:ListBucket"]
+    actions   = ["s3:ListBucket", "s3:GetBucketLocation"]
     resources = [aws_s3_bucket.site.arn]
   }
 
