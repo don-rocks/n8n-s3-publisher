@@ -28,6 +28,25 @@ resource "aws_s3_object" "index" {
   content_type = "text/html; charset=utf-8"
 }
 
+# Page shown for missing URLs (CloudFront's custom error response points here).
+resource "aws_s3_object" "not_found" {
+  bucket       = aws_s3_bucket.site.id
+  key          = "404.html"
+  source       = "${path.module}/site/404.html"
+  etag         = filemd5("${path.module}/site/404.html")
+  content_type = "text/html; charset=utf-8"
+}
+
+# Crawler rules and sitemap location. The sitemap itself is built by n8n.
+resource "aws_s3_object" "robots" {
+  bucket       = aws_s3_bucket.site.id
+  key          = "robots.txt"
+  content_type = "text/plain; charset=utf-8"
+  content = templatefile("${path.module}/site/robots.txt.tftpl", {
+    site_url = "https://${aws_cloudfront_distribution.site.domain_name}"
+  })
+}
+
 output "bucket_name" {
   value = aws_s3_bucket.site.id
 }

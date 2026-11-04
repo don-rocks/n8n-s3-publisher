@@ -57,7 +57,13 @@ This folder explains each AWS service the project uses: what Terraform creates, 
 
 ## Open items
 
-- **Clean post URLs.** `posts/<slug>/` doesn't load `index.html` automatically (see [aws-cloudfront.md](aws-cloudfront.md#known-gaps)). Fix it with a small CloudFront Function before publishing real posts.
 - **Custom domain.** It needs an ACM certificate in `us-east-1`, which the region guardrail probably blocks (see [aws-account-guardrails.md](aws-account-guardrails.md#what-this-means-later)).
-- **Budget alert** (about $5).
 - **Remote state and CI.** Planned: GitHub Actions with OIDC.
+
+## Also created by Terraform
+
+| File | Contents |
+|---|---|
+| `terraform/budget.tf` | $5 monthly AWS Budget: emails at 80% of actual spend and at 100% forecast. The email comes from `terraform.tfvars`, which is gitignored; see `terraform.tfvars.example`. |
+| `terraform/functions/url-rewrite.js` | CloudFront Function for clean URLs |
+| `terraform/site/404.html`, `terraform/site/robots.txt.tftpl` | Static files uploaded to the bucket. `robots.txt` allows all crawlers, including AI answer engines, and points to `/sitemap.xml`, which n8n will build. |

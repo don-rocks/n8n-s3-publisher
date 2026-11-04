@@ -9,6 +9,15 @@ resource "aws_cloudfront_origin_access_control" "site" {
   signing_protocol                  = "sigv4"
 }
 
+# Runs at the edge on every request; see functions/url-rewrite.js.
+resource "aws_cloudfront_function" "url_rewrite" {
+  name    = "n8n-practice-url-rewrite"
+  runtime = "cloudfront-js-2.0"
+  comment = "Clean URLs: folder index.html and trailing-slash redirect"
+  publish = true
+  code    = file("${path.module}/functions/url-rewrite.js")
+}
+
 resource "aws_cloudfront_distribution" "site" {
   enabled             = true
   default_root_object = "index.html"
@@ -30,6 +39,28 @@ resource "aws_cloudfront_distribution" "site" {
 
     # AWS managed "CachingOptimized" cache policy.
     cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+
+    # Clean URLs: /posts/slug/ -> index.html, /posts/slug -> 301 to /posts/slug/.
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.url_rewrite.arn
+    }
+  }
+
+  # CloudFront can't list the private bucket, so S3 answers 403 for missing
+  # pages. Turn that into a real 404 with a friendly page (better for SEO).
+  custom_error_response {
+    error_code            = 403
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 60
+  }
+
+  custom_error_response {
+    error_code            = 404
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 60
   }
 
   restrictions {

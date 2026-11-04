@@ -53,10 +53,27 @@ CloudFront keeps a copy of each page for up to the cache policy's TTL. After n8n
 
 The alternative, short TTLs instead of invalidation, means more traffic back to S3 and slower pages for everyone. Invalidating on publish keeps long caching *and* fresh content.
 
+## Clean URLs: CloudFront Function
+
+`default_root_object` only applies to the site root. S3's REST endpoint has no concept of folder index files, so without help a request for `/posts/my-slug/` would **not** load `posts/my-slug/index.html`.
+
+`aws_cloudfront_function.url_rewrite` (code in `terraform/functions/url-rewrite.js`) runs on every viewer request:
+
+| Request | Result |
+|---|---|
+| `/posts/my-slug/` | Fetches `posts/my-slug/index.html`; the URL in the browser stays clean |
+| `/posts/my-slug` | 301 redirect to `/posts/my-slug/`, so each page has exactly one URL (good for SEO) |
+| `/sitemap.xml`, `/robots.txt`, anything with a dot in its last part | Passed through unchanged |
+
+**Why a CloudFront Function and not Lambda@Edge:** it's much cheaper ($0.10 per million requests, and covered by the free tier), it starts faster, and it's enough for simple URL rewrites. Lambda@Edge is only worth it for network calls or larger code. Linking to `/posts/my-slug/index.html` directly would also work, but it gives uglier URLs and canonical tags.
+
+**Canonical URLs** in the post template must use the trailing-slash form: `https://<site>/posts/my-slug/`.
+
+## Missing pages: real 404s
+
+CloudFront's identity can't list the bucket, so S3 answers 403 "access denied" for keys that don't exist. Two `custom_error_response` blocks map 403 and 404 to `/404.html` with status **404**, so search engines see a proper "not found". `error_caching_min_ttl = 60` caches the error for one minute only, so a post published just after someone hit its URL shows up quickly. `404.html` carries `noindex`.
+
 ## Known gaps
 
-- **Subfolder index pages:** `default_root_object` only applies to the site root. A request for `/posts/my-slug/` does **not** load `posts/my-slug/index.html`, because S3's REST endpoint has no concept of folder index files. Options:
-  - **(recommended)** add a small **CloudFront Function** on viewer-request that appends `index.html` to URLs ending in `/`. It's cheap, runs at the edge, and gives clean URLs.
-  - link to `/posts/my-slug/index.html` directly, which works but gives uglier URLs and canonical tags.
-- **Missing pages return 403, not 404:** CloudFront's identity can't list the bucket, so S3 answers "access denied" for keys that don't exist. Add a custom error response, mapping 403 to a `404.html` with status 404, so search engines see a proper 404.
+- **Query strings are dropped** on the trailing-slash redirect. The cache ignores them anyway; revisit if tracking parameters ever matter.
 - **No access logs or WAF:** not needed for practice. Consider standard logging for client sites.
