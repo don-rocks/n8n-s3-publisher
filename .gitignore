@@ -11,3 +11,6 @@ crash.log
 
 # macOS
 .DS_Store
+
+# Local progress checklist (personal, not part of the template)
+checklist/
