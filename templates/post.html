@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="%%lang%%">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>%%title%%</title>
+<meta name="description" content="%%description%%">
+<link rel="canonical" href="%%canonical_url%%">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="%%author%%">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="%%site_name%%">
+<meta property="og:title" content="%%title%%">
+<meta property="og:description" content="%%description%%">
+<meta property="og:url" content="%%canonical_url%%">
+<meta property="article:published_time" content="%%date_published%%">
+<meta property="article:modified_time" content="%%date_modified%%">
+%%image_meta%%
+<meta name="twitter:card" content="%%twitter_card%%">
+
+<script type="application/ld+json">
+%%json_ld%%
+</script>
+
+<style>
+  :root { --bg: #ffffff; --fg: #1d232b; --muted: #5d6673; --line: #dde2e8; --accent: #0b5cad; --soft: #f3f6f9; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #12161c; --fg: #e4e8ed; --muted: #9aa4b1; --line: #2c3540; --accent: #7db4ef; --soft: #1a2029; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 18px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  .wrap { max-width: 42rem; margin: 0 auto; padding: 0 16px; }
+  .site { padding-block: 20px; font-size: 15px; }
+  .site a { color: var(--muted); text-decoration: none; }
+  .site a:hover { color: var(--accent); }
+  h1 { font-size: 2.1rem; line-height: 1.2; margin: 1.5rem 0 0.5rem; text-wrap: balance; }
+  h2 { font-size: 1.4rem; line-height: 1.3; margin: 2.2rem 0 0.6rem; text-wrap: balance; }
+  h3 { font-size: 1.1rem; line-height: 1.35; margin: 1.6rem 0 0.4rem; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: 15px; margin-bottom: 1.5rem; }
+  .lead { font-size: 1.15rem; }
+  .takeaways { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 4px 20px 8px; margin: 2rem 0; }
+  .takeaways h2 { font-size: 1.05rem; margin-top: 1rem; }
+  .takeaways ul { margin: 0 0 0.5rem; padding-left: 1.2rem; }
+  .faq { border-top: 1px solid var(--line); margin-top: 2.5rem; }
+  footer.site { border-top: 1px solid var(--line); margin-top: 3rem; }
+</style>
+</head>
+<body>
+<header class="site wrap"><a href="/">%%site_name%%</a></header>
+
+<main class="wrap">
+<article>
+  <header>
+    <h1>%%title%%</h1>
+    <p class="meta">By %%author%% · <time datetime="%%date_published%%">%%date_published_display%%</time>%%updated_note%%</p>
+    %%intro_html%%
+  </header>
+
+  %%takeaways_html%%
+
+  %%sections_html%%
+
+  %%faq_html%%
+</article>
+</main>
+
+<footer class="site wrap"><a href="/">← All posts</a></footer>
+</body>
+</html>

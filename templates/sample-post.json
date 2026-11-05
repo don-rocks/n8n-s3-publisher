@@ -1,0 +1,47 @@
+{
+  "site": {
+    "url": "https://dajz1uq2onsbj.cloudfront.net",
+    "name": "Practice site",
+    "lang": "en"
+  },
+  "post": {
+    "slug": "what-is-answer-engine-optimisation",
+    "title": "What is answer engine optimisation (AEO)?",
+    "description": "AEO means writing pages so AI assistants and search features can quote a clear, direct answer. Here is how it differs from SEO and how to start.",
+    "author": "Don",
+    "date_published": "2026-11-05",
+    "date_modified": "2026-11-05",
+    "og_image": "",
+    "intro": "Search is no longer only a list of links. AI assistants and search features now answer questions directly, quoting the pages that answer them best.\n\nAnswer engine optimisation (AEO) is the practice of writing for that: clear questions, direct answers, and structure machines can read.",
+    "takeaways": [
+      "AEO is about being the quoted answer, not only a ranked link.",
+      "Put the direct answer in the first sentence under each question.",
+      "Structured data (Article, FAQPage) helps machines understand the page.",
+      "Good SEO basics still apply: fast pages, clean URLs, real expertise."
+    ],
+    "sections": [
+      {
+        "question": "What does answer engine optimisation mean?",
+        "answer": "Answer engine optimisation is writing and structuring a page so that AI assistants and search features can lift a clear, accurate answer from it.\n\nInstead of optimising only for a position in a list of links, you optimise to be the source an assistant quotes when someone asks a question."
+      },
+      {
+        "question": "How is AEO different from SEO?",
+        "answer": "SEO aims to rank a page for a search query; AEO aims to have a specific passage chosen as the answer.\n\nThey overlap heavily. AEO builds on SEO & adds a stronger focus on question-shaped headings, short self-contained answers and structured data."
+      },
+      {
+        "question": "How do I start with AEO?",
+        "answer": "Start by turning each section heading into the question a reader would actually ask, then answer it in the first one or two sentences.\n\nAdd an FAQ for the follow-up questions, mark the page up with Article and FAQPage structured data, and keep each post focused on one topic."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Does AEO replace SEO?",
+        "answer": "No. AEO builds on SEO. Pages still need to be crawlable, fast and trustworthy before any answer engine will quote them."
+      },
+      {
+        "question": "Do I need structured data for AEO?",
+        "answer": "It is not strictly required, but Article and FAQPage markup make the page's meaning explicit, which helps both search engines and AI assistants."
+      }
+    ]
+  }
+}
