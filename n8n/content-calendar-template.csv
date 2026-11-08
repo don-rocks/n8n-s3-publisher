@@ -1,0 +1,13 @@
+status,publish_date,slug,title,description,author,intro,takeaways,q1,a1,q2,a2,q3,a3,q4,a4,q5,a5,faq_q1,faq_a1,faq_q2,faq_a2,faq_q3,faq_a3,og_image,published_at,url,error
+Ready,2026-11-05,what-is-answer-engine-optimisation,What is answer engine optimisation (AEO)?,"AEO means writing pages so AI assistants and search features can quote a clear, direct answer. Here is how it differs from SEO and how to start.",Don,"Search is no longer only a list of links. AI assistants and search features now answer questions directly, quoting the pages that answer them best.
+
+Answer engine optimisation (AEO) is the practice of writing for that: clear questions, direct answers, and structure machines can read.","AEO is about being the quoted answer, not only a ranked link.
+Put the direct answer in the first sentence under each question.
+Structured data (Article, FAQPage) helps machines understand the page.
+Good SEO basics still apply: fast pages, clean URLs, real expertise.",What does answer engine optimisation mean?,"Answer engine optimisation is writing and structuring a page so that AI assistants and search features can lift a clear, accurate answer from it.
+
+Instead of optimising only for a position in a list of links, you optimise to be the source an assistant quotes when someone asks a question.",How is AEO different from SEO?,"SEO aims to rank a page for a search query; AEO aims to have a specific passage chosen as the answer.
+
+They overlap heavily. AEO builds on SEO & adds a stronger focus on question-shaped headings, short self-contained answers and structured data.",How do I start with AEO?,"Start by turning each section heading into the question a reader would actually ask, then answer it in the first one or two sentences.
+
+Add an FAQ for the follow-up questions, mark the page up with Article and FAQPage structured data, and keep each post focused on one topic.",,,,,Does AEO replace SEO?,"No. AEO builds on SEO. Pages still need to be crawlable, fast and trustworthy before any answer engine will quote them.",Do I need structured data for AEO?,"It is not strictly required, but Article and FAQPage markup make the page's meaning explicit, which helps both search engines and AI assistants.",,,,,,
